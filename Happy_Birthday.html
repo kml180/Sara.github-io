@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎂 Happy Birthday 🎂</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ======================
+       GLOBAL STYLES
+    ====================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #333;
+    }
+
+    h1, h2, h3 {
+      font-weight: 900;
+    }
+
+    p {
+      font-size: 20px;
+      line-height: 1.9;
+    }
+
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* ======================
+       LOGIN PAGE
+    ====================== */
+    .login-box {
+      background: rgba(255,255,255,0.95);
+      width: 360px;
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      animation: floatIn 1.5s ease;
+    }
+
+    .login-box h2 {
+      margin-bottom: 25px;
+      color: #ff5f8a;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff5f8a, #ff8fa3);
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .login-box button:hover {
+      transform: scale(1.05);
+    }
+
+    #error {
+      margin-top: 15px;
+      color: red;
+      display: none;
+      font-size: 14px;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-pass {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    /* ======================
+       MAIN CONTENT
+    ====================== */
+    .content {
+      display: none;
+    }
+
+    section {
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    /* ======================
+       HERO SECTION
+    ====================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 55px;
+      color: #ff4f7b;
+      animation: glow 2s infinite alternate;
+    }
+
+    .hero p {
+      max-width: 800px;
+      margin-top: 25px;
+      font-size: 22px;
+    }
+
+    .scroll-down {
+      margin-top: 60px;
+      font-size: 30px;
+      animation: bounce 2s infinite;
+    }
+
+    /* ======================
+       HEARTS BACKGROUND
+    ====================== */
+    .hearts span {
+      position: absolute;
+      color: rgba(255,255,255,0.6);
+      font-size: 24px;
+      animation: floatUp linear infinite;
+    }
+
+    /* ======================
+       GALLERY
+    ====================== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 50px;
+      padding: 0 40px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 25px;
+      padding: 40px 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      animation: fadeUp 1.5s ease;
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      color: #ff5f8a;
+    }
+
+    /* ======================
+       TIMELINE
+    ====================== */
+    .timeline {
+      max-width: 900px;
+      margin: auto;
+      margin-top: 60px;
+    }
+
+    .timeline-item {
+      background: rgba(255,255,255,0.9);
+      padding: 30px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      animation: slideRight 1.2s ease;
+    }
+
+    /* ======================
+       FOOTER
+    ====================== */
+    footer {
+      background: linear-gradient(135deg, #ff5f8a, #ff8fa3);
+      padding: 80px 20px;
+      text-align: center;
+      color: white;
+      font-size: 24px;
+    }
+
+    /* ======================
+       ANIMATIONS
+    ====================== */
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(60px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff8fa3; }
+      to { text-shadow: 0 0 25px #ff4f7b; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(15px); }
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+    .family-message {
+  max-width: 700px;
+  margin: 30px auto;
+  background: rgba(255,255,255,0.95);
+  padding: 30px;
+  border-radius: 20px;
+  display: none;
+  animation: fadeUp 0.8s ease;
+}
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-weight: bold;
+}
+
+.card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+}
+/* ======================
+   GERMAN QUIZ
+====================== */
+
+.timeline-item button {
+  margin: 10px 8px 0;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff5f8a, #ff8fa3);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline-item button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="center" id="login">
+    <div class="login-box">
+      <h2>🎀 تسجيل الدخول 🎀</h2>
+      <input id="username" placeholder="اسم المستخدم" />
+      <div class="password-wrapper">
+      <input id="password" type="password" placeholder="كلمة المرور" />
+      <span id="togglePass" class="toggle-pass" onclick="togglePassword()">👁️</span>
+    </div>
+      <button onclick="login()">دخول</button>
+      <div id="error">البيانات غير صحيحة</div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content" id="content">
+
+    <section class="hero">
+      <h1>🎉 كل عام وانتي بخير 🎉</h1>
+      <p>
+        اليوم مو أي يوم… اليوم يوم ميلاد إنسانة وجودها بالدنيا يفرق 🤍
+        ضحكتك أمان، وقلبك حياة.
+      </p>
+      <div class="scroll-down">⬇️</div>
+    </section>
+
+    <section>
+      <h1>✨ ليش هذا اليوم مميز؟ ✨</h1>
+      <div class="gallery">
+        <div class="card"><h3>قلب طيب</h3><p>قلبك دايمًا مليان حب وخير.</p></div>
+        <div class="card"><h3>روح جميلة</h3><p>وجودك يغيّر المكان.</p></div>
+        <div class="card"><h3>ضحكة صادقة</h3><p>تشرح الخاطر بدون كلام.</p></div>
+      </div>
+    </section>
+    <section>
+  <h1> رسائل من القلب</h1>
+  <p>اضغطي على أي صورة واقرئي الرسالة 🤍</p>
+
+  <div class="gallery">
+    <div class="card" onclick="toggleFamilyMessage('me')"><img src="https://i.postimg.cc/C1hFjPp9/IMG-8217.jpg" alt=""> <br> 🤍رسالة من كميل</div>
+    <div class="card" onclick="toggleFamilyMessage('bro1')"><img src="https://i.postimg.cc/m2GmV05c/IMG-9088.jpg" alt=""> <br> 🩷رسالة من ليث</div>
+    <div class="card" onclick="toggleFamilyMessage('bro2')"><img src="https://i.postimg.cc/nLvzK9jg/IMG-8218.jpg" alt=""><br>❤️رسالة من راكان</div>
+    <div class="card" onclick="toggleFamilyMessage('mom')"><img src="https://i.postimg.cc/SsHkwyMc/ca1729e4-1f52-4dd9-b186-67ee3046dabf.jpg" alt=""><br>💜رسالة من ليندا</div>
+  </div>
+
+  <div id="me" class="family-message">كلامك أنت هنا ✨</div>
+  <div id="bro1" class="family-message">رسالة الأخ الأول 🤍</div>
+  <div id="bro2" class="family-message">رسالة الأخ الثاني 🤍</div>
+  <div id="mom" class="family-message">يا بنتي… فخورة فيك دايمًا 🤍</div>
+</section>
+
+    <section>
+      <h1>📸 ذكرياتنا</h1>
+      <div class="gallery">
+        <div class="card">صورة 1</div>
+        <div class="card">صورة 2</div>
+        <div class="card">صورة 3</div>
+        <div class="card">صورة 4</div>
+      </div>
+    </section>
+
+    <section>
+      <h1>🕰️ محطات جميلة</h1>
+      <div class="timeline">
+        <div class="timeline-item">أول ضحكة – ذكرى ما تنسى 🤍</div>
+        <div class="timeline-item">أجمل لحظة – كانت معك ✨</div>
+        <div class="timeline-item">واليوم؟ نحتفل فيك 🎂</div>
+      </div>
+    </section>
+
+    <section>
+      <h1>💌 رسالة من القلب</h1>
+      <p>
+        يمكن الكلمات ما توفي حقك، بس بحاول.
+        وجودك بحياتي مو شي بسيط، هو فرق، وأمان، وراحة.
+        كل سنة تمر وأنتِ تكبرين بقيمتك قبل عمرك.
+      </p>
+    </section>
+
+    <section>
+      <h1>🌸 صفاتك الحلوة</h1>
+      <div class="gallery">
+        <div class="card"><h3>الطيبة</h3><p>واضحة بكل تصرفاتك.</p></div>
+        <div class="card"><h3>القوة</h3><p>حتى بلحظات التعب.</p></div>
+        <div class="card"><h3>الذكاء</h3><p>تفكيرك مختلف ومميز.</p></div>
+        <div class="card"><h3>القلب</h3><p>أجمل ما فيك 🤍</p></div>
+      </div>
+    </section>
+<!-- الاختبار الألماني -->
+<section>
+      <h1>🇩🇪 اختبار الثقافة الألمانية</h1>
+      <p>انتي انسانة مثقفة، وهذا الاختبار أكبر دليل </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          معنى كلمة <b>Danke</b>؟<br>
+          <button onclick="checkAnswer(true, this)">شكرًا</button>
+          <button onclick="checkAnswer(false, this)">وداعًا</button>
+        </div>
+
+        <div class="timeline-item">
+          معنى كلمة <b>Hallo</b>؟<br>
+          <button onclick="checkAnswer(false, this)">ليلًا سعيدًا</button>
+          <button onclick="checkAnswer(true, this)">مرحبًا</button>
+        </div>
+
+        <div class="timeline-item">
+          معنى كلمة <b>Bitte</b>؟<br>
+          <button onclick="checkAnswer(false, this)">آسف</button>
+          <button onclick="checkAnswer(true, this)">من فضلك</button>
+        </div>
+
+        <div class="timeline-item">
+          معنى كلمة <b>Tschüss</b>؟<br>
+          <button onclick="checkAnswer(true, this)">وداعًا</button>
+          <button onclick="checkAnswer(false, this)">مرحبًا</button>
+        </div>
+
+        <div class="timeline-item">
+          معنى <b>Guten Morgen</b>؟<br>
+          <button onclick="checkAnswer(false, this)">مساء الخير</button>
+          <button onclick="checkAnswer(true, this)">صباح الخير</button>
+        </div>
+
+        <p id="quizResult"></p>
+      </div>
+    </section>
+
+
+    <section>
+      <h1>🎁 أمنيات للسنة الجديدة</h1>
+      <div class="timeline">
+        <div class="timeline-item">فرح ما ينقطع ✨</div>
+        <div class="timeline-item">نجاح أقرب مما تتخيلين 🌟</div>
+        <div class="timeline-item">راحة بال تليق فيك 🌷</div>
+        <div class="timeline-item">ضحكة دايمًا حاضرة 😊</div>
+      </div>
+    </section>
+
+    <section>
+      <h1>📖 كلمات أخيرة</h1>
+      <p>
+        لو بيدي أكتب اسمك على الأيام،
+        خليت كل يوم يشبهك جمال.
+        استمري كما أنتِ، فالعالم يحتاج هذا النور.
+      </p>
+    </section>
+
+    <footer>
+      ❤️ 18 ديسمبر – يوم ميلاد أغلى إنسانة ❤️<br>
+      هذه الصفحة صُنعت بحب… خصيصًا لك 🌸
+    </footer>
+
+  </div>
+
+<script>
+    const correctUser = "a";
+    const correctPass = "a";
+    let score = 0;
+    let totalAnswered = 0;
+    const TOTAL_QUESTIONS = 5;
+
+    function login() {
+      const userInput = document.getElementById('username');
+      const passInput = document.getElementById('password');
+      const errorMsg = document.getElementById('error');
+
+      if (!userInput || !passInput) {
+        alert('خطأ في الحقول');
+        return;
+      }
+
+      const u = userInput.value.trim();
+      const p = passInput.value.trim();
+
+      if (u === correctUser && p === correctPass) {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+        errorMsg.style.display = 'none';
+        window.scrollTo(0, 0);
+        createHearts();
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+
+    function togglePassword() {
+      const pass = document.getElementById('password');
+      const icon = document.getElementById('togglePass');
+
+      if (!pass) return;
+
+      if (pass.type === 'password') {
+        pass.type = 'text';
+        icon.textContent = '🙈';
+      } else {
+        pass.type = 'password';
+        icon.textContent = '👁️';
+      }
+    }
+
+    function createHearts() {
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('span');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = 5 + Math.random() * 5 + 's';
+        heart.className = 'hearts';
+        document.body.appendChild(heart);
+      }
+    }
+
+    function toggleFamilyMessage(id) {
+      document.querySelectorAll('.family-message').forEach(msg => {
+        msg.style.display =
+          msg.id === id && msg.style.display !== 'block'
+            ? 'block'
+            : 'none';
+      });
+    }
+
+    function checkAnswer(isCorrect, btn) {
+      // تمنع الضغط المتكرر
+      if (btn.classList.contains('answered')) return;
+
+      btn.classList.add('answered');
+      totalAnswered++;
+
+      // تغيير لون الزر حسب الإجابة
+      if (isCorrect) {
+        score++;
+        btn.style.background = '#4CAF50'; // أخضر
+      } else {
+        btn.style.background = '#f44336'; // أحمر
+      }
+      btn.style.color = 'white';
+
+      // تعطيل باقي أزرار نفس السؤال
+      const parent = btn.parentElement;
+      parent.querySelectorAll('button').forEach(b => {
+        b.disabled = true;
+        if (!b.classList.contains('answered')) b.style.opacity = 0.5;
+      });
+
+      // عرض النتيجة النهائية بعد آخر سؤال
+      if (totalAnswered === TOTAL_QUESTIONS) {
+        document.getElementById('quizResult').textContent =
+          `✨ نتيجتك: ${score} من ${TOTAL_QUESTIONS} شفتي كيف ؟ حتى تعديتي مرحلة الهندسة`;
+      }
+    }
+  </script>
+
+
+
+</body>
+</html>
