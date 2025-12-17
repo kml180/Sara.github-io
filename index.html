@@ -581,9 +581,21 @@ function checkAnswer(isCorrect, btn) {
   });
 
   if (totalAnswered === TOTAL_QUESTIONS) {
-    document.getElementById('quizResult').textContent =
-      `✨ نتيجتك: ${score} من ${TOTAL_QUESTIONS} شفتي كيف ؟ حتى تعديتي مرحلة الهندسة`;
+  const resultEl = document.getElementById('quizResult');
+
+  if (!resultEl) {
+    console.error('quizResult element not found');
+    return;
   }
+
+  if (score === TOTAL_QUESTIONS) {
+    resultEl.innerHTML =
+      `✨ نتيجتك: ${score} من ${TOTAL_QUESTIONS}<br>🔥 شفتي كيف؟ حتى تعديتي مرحلة الهندسة`;
+  } else {
+    resultEl.innerHTML =
+      `💫 نتيجتك: ${score} من ${TOTAL_QUESTIONS}<br>شفتي كيف ؟ حتى تعديتي مرحلة الهندسة ، حتى لو عندك غلط انتي دايما مثقفة`;
+  }
+}
 }
 
 /* ======================
